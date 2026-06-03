@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-k8s-app",
+  "version": "1.0.0",
+  "description": "Node.js app deployed on Kubernetes (Minikube) via AWS ECR and GitHub Actions CI/CD",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

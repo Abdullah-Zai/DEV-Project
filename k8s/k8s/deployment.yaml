@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-abzubair
+  labels:
+    app: nodejs-app-abzubair
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-app-abzubair
+  template:
+    metadata:
+      labels:
+        app: nodejs-app-abzubair
+    spec:
+      containers:
+        - name: nodejs-app
+          # MAKE SURE to replace <AWS_ACCOUNT_ID> with your friend's 12-digit AWS Account ID
+          image: <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/nodejs-k8s-app-abzubair:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      imagePullSecrets:
+        - name: ecr-registry-secret
