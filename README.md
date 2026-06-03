@@ -162,21 +162,3 @@ aws ecr delete-repository --repository-name nodejs-k8s-app --force --region us-e
 
 ---
 
-## Cost Analysis
-
-| Resource | Free Tier | Cost |
-|----------|-----------|------|
-| EC2 t2.micro | 750 hrs/month | $0 |
-| ECR | 500 MB/month | $0 |
-| k3s | Free tool | $0 |
-| GitHub Actions | 2,000 min/month | $0 |
-| **Total** | | **$0** |
-
----
-
-## Endpoints
-
-| URL | Description |
-|-----|-------------|
-| `http://<EC2_IP>/` | App: visitor counter, container ID, timestamp |
-| `http://<EC2_IP>/health` | JSON health check |
